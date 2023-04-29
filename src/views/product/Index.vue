@@ -246,104 +246,99 @@
                               </ul>
                             </div>
                           </div>
-                          <div :id="`popup${product.id}`" class="product-gird__quick-view-popup mfp-hide">
-                            <div v-if="popupProduct" class="container">
-                              <div class="row justify-content-between align-items-center">
-                                <div class="col-lg-6">
-                                  <div class="quick-view__left-content">
-                                    <div class="tabs">
-                                      <div class="popup-product-thumb-box">
-                                        <ul>
-                                          <li v-for="productImage in popupProduct.product_images"
-                                              class="tab-nav popup-product-thumb">
-                                            <a :href="`#tabb${productImage.id}`">
-                                              <img :src="productImage.url"
-                                                   alt="" /> </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div class="popup-product-main-image-box">
-                                        <div v-for="productImage in popupProduct.product_images" :id="`tabb${productImage.id}`"
-                                             class="tab-item popup-product-image">
-                                          <div
-                                              class="popup-product-single-image">
-                                            <img :src="productImage.url"
-                                                 alt="" /> </div>
+                            <div :id="`popup${product.id}`" class="product-gird__quick-view-popup mfp-hide">
+                              <div v-if="popupProduct" class="container">
+                                <div class="row justify-content-between">
+                                  <div class="col-lg-6">
+                                    <div class="quick-view__left-content">
+                                      <div class="tabs">
+                                        <div class="popup-product-thumb-box">
+                                          <ul>
+                                            <li v-for="productImage in popupProduct.product_images"
+                                                class="tab-nav popup-product-thumb" :aria-controls="`tabb${productImage.id}`">
+                                              <a :href="`#tabb${productImage.id}`">
+                                                <img :src="productImage.url"
+                                                     alt="" /> </a>
+                                            </li>
+                                          </ul>
                                         </div>
-                                        <button class="prev"> <i
-                                          class="flaticon-back"></i>
-                                      </button> <button class="next"> <i
-                                          class="flaticon-next"></i>
-                                      </button>
+                                        <div class="popup-product-main-image-box">
+                                          <div v-for="productImage in popupProduct.product_images" :id="`tabb${productImage.id}`" class="tab-item popup-product-image">
+                                            <div class="popup-product-single-image">
+                                              <img :src="productImage.url" style="min-height: 350px; height: auto">
+                                            </div>
+                                          </div>
+                                          <button class="prev"> <i
+                                              class="flaticon-back"></i>
+                                          </button> <button class="next"> <i
+                                            class="flaticon-next"></i>
+                                        </button>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                                <div class="col-lg-6">
-                                  <div class="popup-right-content">
-                                    <h3>{{popupProduct.title}}</h3>
-                                    <div class="ratting"> <i
-                                        class="flaticon-star"></i> <i
-                                        class="flaticon-star"></i> <i
-                                        class="flaticon-star"></i>
-                                      <i class="flaticon-star"></i> <i
+                                  <div class="col-lg-6">
+                                    <div class="popup-right-content">
+                                      <h3>{{popupProduct.title}}</h3>
+                                      <div class="ratting"> <i
+                                          class="flaticon-star"></i> <i
+                                          class="flaticon-star"></i> <i
                                           class="flaticon-star"></i>
-                                      <span>(112)</span> </div>
-                                    <p class="text"> {{popupProduct.description}}
-                                    </p>
-                                    <div class="price">
-                                      <h2> {{ popupProduct.price }}.руб
-                                        <del v-if="popupProduct.old_price > 0"> {{popupProduct.old_price}}.руб</del>
-                                      </h2>
-                                      <h6 v-if="popupProduct.is_published == 1" style="color: green;"> В наличии</h6>
-                                      <h6 v-else style="color: red;"> Нет в наличии</h6>
-                                    </div>
-                                    <div class="color-varient"> <a href="#0"
-                                                                   class="color-name pink">
-                                      <span>Pink</span> </a> <a href="#0"
-                                                                class="color-name red">
-                                      <span>Red</span> </a>
-                                      <a href="#0"
-                                         class="color-name yellow"><span>Yellow</span>
-                                      </a> <a href="#0" class="color-name blue">
-                                        <span>Blue</span>
-                                      </a> <a href="#0" class="color-name black">
-                                        <span>Black</span> </a> </div>
-                                    <div class="add-product">
-                                      <h6>Количество:</h6>
-                                      <div class="button-group">
-                                        <div class="qtySelector text-center">
+                                        <i class="flaticon-star"></i> <i
+                                            class="flaticon-star"></i>
+                                        <span>(112)</span> </div>
+                                      <p class="text"> {{popupProduct.description}}
+                                      </p>
+                                      <div class="price">
+                                        <h2> {{ popupProduct.price }}.руб
+                                          <del v-if="popupProduct.old_price > 0"> {{popupProduct.old_price}}.руб</del>
+                                        </h2>
+                                        <h6 v-if="popupProduct.is_published == 1" style="color: green;"> В наличии</h6>
+                                        <h6 v-else style="color: red;"> Нет в наличии</h6>
+                                      </div>
+                                      <div class="color-varient"> <a href="#0"
+                                                                     class="color-name pink">
+                                        <span>Pink</span> </a> <a href="#0"
+                                                                  class="color-name red">
+                                        <span>Red</span> </a>
+                                        <a href="#0"
+                                           class="color-name yellow"><span>Yellow</span>
+                                        </a> <a href="#0" class="color-name blue">
+                                          <span>Blue</span>
+                                        </a> <a href="#0" class="color-name black">
+                                          <span>Black</span> </a> </div>
+                                      <div class="add-product">
+                                        <h6>Количество:</h6>
+                                        <div class="button-group">
+                                          <div class="qtySelector text-center">
                                                                                     <span class="decreaseQty"><i
                                                                                         class="flaticon-minus"></i>
                                                                                     </span> <input type="number"
                                                                                                    class="qtyValue" value="1" />
-                                          <span class="increaseQty"> <i
-                                              class="flaticon-plus"></i>
+                                            <span class="increaseQty"> <i
+                                                class="flaticon-plus"></i>
                                                                                     </span> </div>
-                                        <button class="btn--primary "> Добавить в корзину </button>
+                                          <button class="btn--primary "> Добавить в корзину </button>
+                                        </div>
                                       </div>
-                                    </div>
-                                    <div class="payment-method"> <a href="#0"> <img
-                                        src="src/assets/images/payment_method/method_1.png"
-                                        alt=""> </a>
-                                      <a href="#0"> <img
-                                          src="src/assets/images/payment_method/method_2.png"
-                                          alt=""> </a> <a href="#0"> <img
-                                          src="src/assets/images/payment_method/method_3.png"
+                                      <div class="payment-method"> <a href="#0"> <img
+                                          src="src/assets/images/payment_method/method_1.png"
                                           alt=""> </a>
-                                      <a href="#0"> <img
-                                          src="src/assets/images/payment_method/method_4.png"
-                                          alt=""> </a> </div>
+                                        <a href="#0"> <img
+                                            src="src/assets/images/payment_method/method_2.png"
+                                            alt=""> </a> <a href="#0"> <img
+                                            src="src/assets/images/payment_method/method_3.png"
+                                            alt=""> </a>
+                                        <a href="#0"> <img
+                                            src="src/assets/images/payment_method/method_4.png"
+                                            alt=""> </a> </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="products-three-single-content text-center"> <span>{{ product.category.title}}</span>
-                            <h5><a href="shop-details-3.html"> {{ product.title}} </a>
-                            </h5>
-                            <p><del v-if="product.old_price != 0">{{product.old_price}}.руб</del> {{product.price}}.руб</p>
-                          </div>
+
+
                         </div>
                       </div>
                     </div>
@@ -377,6 +372,7 @@
 
 <script>
 export default {
+
   name: "Index",
   mounted() {
     $(document).trigger('change')
