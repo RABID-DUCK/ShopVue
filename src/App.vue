@@ -52,7 +52,7 @@
         <div class="d-lg-block d-none">
           <div class="row g-0 position-relative">
             <div class="col-lg-3 d-flex align-items-center justify-content-center border-rit ">
-              <div class="logo"> <a href="index.html"> <img src="src/assets/images/logo/logo.png" alt=""> </a>
+              <div class="logo"> <a href="index.html"> <img src="src/assets/images/logo/logo.png" alt="" style="height: 90px"> </a>
               </div>
             </div>
             <div class="col-lg-9 g-0 p-0">
@@ -60,7 +60,7 @@
                 <div class="col-12">
                   <div class="some-info">
                     <p class="d-flex align-items-center"> <span class="icon"> <i
-                        class="flaticon-power"></i> </span> Welcome to Karte Online Shop</p>
+                        class="flaticon-power"></i> </span> Welcome to Game ru</p>
                     <div class="right d-flex align-items-center ">
                       <div class="language currency"> <select>
                         <option>USD</option>
@@ -130,27 +130,6 @@
                     <i class="flaticon-shopping-cart"></i>
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container position-relative d-lg-block d-none">
-        <div class="d-flex align-items-center justify-content-between"> <a href="index.html" class="logo me-2">
-          <img src="src/assets/images/logo/logo.png" alt=""> </a>
-          <div class="mega-menu-default mega-menu d-lg-block d-none">
-            <div class="container ">
-              <div class="row">
-                <nav>
-                  <ul
-                      class="page-dropdown-menu d-flex align-items-center justify-content-center">
-                    <li class="dropdown-list"> <router-link to="/"> <span>Home</span></router-link></li>
-                    <li class="dropdown-list">
-                      <router-link to="/products"> <span>Продукты</span></router-link>
-                    </li>
-                  </ul>
-                </nav>
-
               </div>
             </div>
           </div>
@@ -315,7 +294,7 @@
       <div class="container">
         <div class="footer_bottom_content">
           <div class="copyright wow fadeInUp animated">
-            <p>© 2022 <a href="index.html">Karte.</a> All Rights Reserved.</p>
+            <p>© 2022 <a href="index.html">Game ru.</a> All Rights Reserved.</p>
           </div>
           <div class="footer-payment wow fadeInUp animated">
             <a href="#0"> <img src="src/assets/images/home-four/method-1.jpg" alt="payment"> </a>

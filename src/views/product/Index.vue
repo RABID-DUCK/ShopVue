@@ -2,7 +2,7 @@
 <div>
   <main class="overflow-hidden ">
     <!--Start Breadcrumb Style2-->
-    <div class="breadcrumb-area" style="background-image: url(src/assets/images/inner-pages/breadcum-bg.png);">
+    <div class="breadcrumb-area" style="background-image: url(src/assets/images/logo/logo.png);">
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
@@ -29,7 +29,7 @@
             <div class="product-categories-one__inner">
               <ul>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img1.png"
+                  <div class="inner"> <img src="src/assets/images/logo/logo.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -37,7 +37,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img2.png"
+                  <div class="inner"> <img src="src/assets/images/logo/logo.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -45,7 +45,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img3.png"
+                  <div class="inner"> <img src="src/assets/images/logo/logo.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -53,7 +53,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img4.png"
+                  <div class="inner"> <img src="src/assets/images/logo/logo.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -61,7 +61,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img5.png"
+                  <div class="inner"> <img src="src/assets/images/logo/logo.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -69,7 +69,7 @@
                   </a> </div>
                 </li>
                 <li> <a href="#0" class="img-box">
-                  <div class="inner"> <img src="src/assets/images/shop/product-categories-v1-img6.png"
+                  <div class="inner"> <img src="src/assets/images/logo/logo.png"
                                            alt="" /> </div>
                 </a>
                   <div class="title"> <a href="#0">
@@ -136,19 +136,15 @@
                   <div
                       class="right-box justify-content-md-between justify-content-center wow fadeInUp animated">
                     <div class="short-by">
-                      <div class="select-box">
-                        <select class="wide" v-model="selectedSort" @change="sortedList">
-                          <option data-display="Сортировать по">Все </option>
-                          <option value="alphabet-asc">В алфавитном порядке, A-Z</option>
-                          <option value="alphabet-desc">В алфавитном порядке, Z-A</option>
-                          <option value="price-asc">Цена, от низкой к высокой</option>
-                          <option value="price-desc">Цена, высокой к низкой</option>
-                          <option value="date-desc">Дата, новые добавленные</option>
-                          <option value="date-desc">{{selectedSort}}</option>
+                      <div class="select-box sort-select">
+                        <select class="wide" id="sorting" v-model="selectedSort" @change="sortedList">
+                          <option v-for="sort in sortArray" :value="sort.key" :selected="sort.key === 'all' ? true : false">{{sort.name}} </option>
                         </select>
                       </div>
-                      <div>{{selectedSort}}</div>
+                      <div> </div>
+
                     </div>
+
                     <div class="product-view-style d-flex justify-content-md-between justify-content-center">
                       <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -184,7 +180,7 @@
                               href="shop-details-3.html" class="d-block"> <img
                               :src="product.image_url"
                               class="first-img" alt="" /> <img
-                              src="src/assets/images/home-three/productss2-hover-1.png"
+                              src="src/assets/images/logo/logo.png"
                               alt="" class="hover-img" />
                           </a>
                             <div class="products-grid-one__badge-box"> <span
@@ -257,17 +253,6 @@
                                         <h6 v-if="popupProduct.is_published == 1" style="color: green;"> В наличии</h6>
                                         <h6 v-else style="color: red;"> Нет в наличии</h6>
                                       </div>
-                                      <div class="color-varient"> <a href="#0"
-                                                                     class="color-name pink">
-                                        <span>Pink</span> </a> <a href="#0"
-                                                                  class="color-name red">
-                                        <span>Red</span> </a>
-                                        <a href="#0"
-                                           class="color-name yellow"><span>Yellow</span>
-                                        </a> <a href="#0" class="color-name blue">
-                                          <span>Blue</span>
-                                        </a> <a href="#0" class="color-name black">
-                                          <span>Black</span> </a> </div>
                                       <div class="add-product">
                                         <h6>Количество:</h6>
                                         <div class="button-group">
@@ -354,7 +339,13 @@ export default {
       categories: [],
       prices: [],
       tags: [],
-      selectedSort: ''
+      sortArray: [
+        {key: 'all','name' : 'Все'},
+        {key: 'priceCreasing','name' : 'Цена по возростанию'},
+        {key: 'priceDecreasing','name' : 'Цена по убыванию'},
+        {key: 'dateNew','name' : 'Дата к новым'}
+      ],
+      selectedSort: "all"
     }
   },
   methods: {
@@ -384,12 +375,27 @@ export default {
         })
     },
     sortedList(){
-      console.log("DADADADA");
+      switch (this.selectedSort){
+        case 'all':
+            this.products.sort((a,b) => a.id - b.id)
+          return;
+        case 'priceCreasing':
+          this.products.sort((a,b) => a.price - b.price);
+              break;
+        case 'priceDecreasing':
+            this.products.sort((a,b) => b.price - a.price)
+          break;
+        case 'dateNew':
+          this.products.sort((a,b) => new Date(b.date_added) - new Date(a.date_added))
+          break;
+      }
+
     },
     getProducts(){
       this.axios.post('http://market/api/products')
           .then(res => {
             this.products = res.data.data;
+            console.log(res);
           })
           .finally(v => {
         $(document).trigger('changed')
@@ -409,18 +415,20 @@ export default {
           .then(res => {
             this.filterList = res.data;
             //  Price Filter
-            if ($("#price-range").length) {
-              $("#price-range").slider({
-                range: true,
-                min: this.filterList.price.min,
-                max: this.filterList.price.max,
-                values: [this.filterList.price.min, this.filterList.price.max],
-                slide: function (event, ui) {
-                  $("#priceRange").val("₽" + ui.values[0] + " - ₽" + ui.values[1]);
-                }
-              });
-              $("#priceRange").val("₽" + $("#price-range").slider("values", 0) + " - ₽" + $("#price-range").slider("values", 1));
-            }
+            this.minPrice = this.filterList.price.min;
+            this.maxPrice = this.filterList.price.max;
+             if ($("#price-range").length) {
+               $("#price-range").slider({
+                 range: true,
+                 min: this.filterList.price.min,
+                 max: this.filterList.price.max,
+                 values: [this.filterList.price.min, this.filterList.price.max],
+                 slide: function (event, ui) {
+                   $("#priceRange").val("₽" + ui.values[0] + " - ₽" + ui.values[1]);
+                 }
+               });
+               $("#priceRange").val("₽" + $("#price-range").slider("values", 0) + " - ₽" + $("#price-range").slider("values", 1));
+             }
           })
           .finally(v => {
             $(document).trigger('changed');
@@ -428,8 +436,6 @@ export default {
     }
   }
 }
-var sortByAZ = function (d1, d2){ return (d1.title.toLowerCase() > d2.title.toLowerCase()) ? 1 : -1;};
-var sortByPrice = function (d1, d2){ return (d1.price > d2.price) ? 1 : -1};
 </script>
 
 <style scoped>
