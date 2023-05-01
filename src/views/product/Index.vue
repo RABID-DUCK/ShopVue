@@ -285,7 +285,7 @@
                             </div>
                           <div class="products-three-single-content text-center">
                             <span>{{ product.category.title }}</span>
-                            <h5><a href="shop-details-3.html"> {{ product.title }}</a>
+                            <h5><router-link :to="{name: 'products.show', params: {id: product.id}}"> {{ product.title }}</router-link>
                             </h5>
                             <p><del v-if="product.old_price">{{product.old_price}}.руб</del>
                               {{ product.price }}.руб</p>
@@ -300,16 +300,25 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center wow fadeInUp animated">
-                <ul class="pagination text-center">
-                  <li class="next"><a href="#0"><i class="flaticon-left-arrows"
-                                                   aria-hidden="true"></i> </a></li>
-                  <li><a href="#0">1</a></li>
-                  <li><a href="#0" class="active">2</a></li>
-                  <li><a href="#0">3</a></li>
-                  <li><a href="#0">...</a></li>
-                  <li><a href="#0">10</a></li>
-                  <li class="next"><a href="#0"><i class="flaticon-next-1"
-                                                   aria-hidden="true"></i> </a></li>
+                <ul class="pagination text-center" >
+                  <li class="next" v-if="pagination.current_page !== 1">
+                    <a @click.prevent="getProducts(pagination.current_page - 1)" href="#0"><i class="flaticon-left-arrows" aria-hidden="true"></i>
+                    </a></li>
+                  <li v-for="paginate in pagination.links">
+                    <template v-if="Number(paginate.label) && (pagination.current_page - paginate.label < 2 && pagination.current_page - paginate.label > -2)
+                    || Number(paginate.label) === 1 || Number(paginate.label) === pagination.last_page
+">
+                    <a @click.prevent="getProducts(paginate.label)" href="#0" :class="paginate.active ? 'active' : ''">{{paginate.label}}</a>
+                    </template>
+                    <template v-if="Number(paginate.label) && pagination.current_page - paginate.label === 2 && pagination.current_page !== 3
+                              || Number(paginate.label) && pagination.current_page !== pagination.last_page -2 && (pagination.current_page - paginate.label === -2)
+">
+                      <a>...</a>
+                    </template>
+                  </li>
+                  <li class="next"  v-if="pagination.current_page !== pagination.last_page" >
+                    <a @click.prevent="getProducts(pagination.current_page + 1)" href="#0"><i class="flaticon-next-1" aria-hidden="true"></i> </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -345,7 +354,8 @@ export default {
         {key: 'priceDecreasing','name' : 'Цена по убыванию'},
         {key: 'dateNew','name' : 'Дата к новым'}
       ],
-      selectedSort: "all"
+      selectedSort: "all",
+      pagination: []
     }
   },
   methods: {
@@ -361,18 +371,7 @@ export default {
     filterProductBtn(){
       let prices = $('#priceRange').val();
       this.prices = prices.replace(/[\s+]|[₽]/g, '').split('-');
-
-      this.axios.post('http://market/api/products', {
-        'filterList': this.filterList,
-        'categories': this.categories,
-        'prices': this.prices,
-        'tags': this.tags
-      }).then(res => {
-        this.products = res.data.data
-      })
-        .finally(v => {
-          $(document).trigger('changed')
-        })
+      this.getProducts()
     },
     sortedList(){
       switch (this.selectedSort){
@@ -391,10 +390,17 @@ export default {
       }
 
     },
-    getProducts(){
-      this.axios.post('http://market/api/products')
+    getProducts(page = 1){
+      this.axios.post('http://market/api/products', {
+        'filterList': this.filterList,
+        'categories': this.categories,
+        'prices': this.prices,
+        'tags': this.tags,
+        'page': page
+      })
           .then(res => {
             this.products = res.data.data;
+            this.pagination = res.data.meta;
             console.log(res);
           })
           .finally(v => {
@@ -415,8 +421,6 @@ export default {
           .then(res => {
             this.filterList = res.data;
             //  Price Filter
-            this.minPrice = this.filterList.price.min;
-            this.maxPrice = this.filterList.price.max;
              if ($("#price-range").length) {
                $("#price-range").slider({
                  range: true,

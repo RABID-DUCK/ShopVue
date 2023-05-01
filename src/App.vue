@@ -13,7 +13,7 @@
                 <div class="row">
                   <div class="menu-info d-flex justify-content-between align-items-center">
                     <div class="menubar"> <span></span> <span></span> <span></span> </div> <a
-                      href="index.html" class="logo"> <img src="src/assets/images/logo/logo.png"
+                      href="index.html" class="logo"> <img src="http://127.0.0.1:5173/src/assets/images/logo/logo.png"
                                                            alt=""> </a>
                     <div class="cart-holder">
                       <a href="#0" class="cart cart-icon position-relative">
@@ -52,7 +52,7 @@
         <div class="d-lg-block d-none">
           <div class="row g-0 position-relative">
             <div class="col-lg-3 d-flex align-items-center justify-content-center border-rit ">
-              <div class="logo"> <a href="index.html"> <img src="src/assets/images/logo/logo.png" alt="" style="height: 90px"> </a>
+              <div class="logo"> <a href="index.html"> <img src="http://127.0.0.1:5173/src/assets/images/logo/logo.png" alt="" style="height: 90px"> </a>
               </div>
             </div>
             <div class="col-lg-9 g-0 p-0">
@@ -124,7 +124,7 @@
             <div class="row">
               <div class="menu-info d-flex justify-content-between align-items-center">
                 <div class="menubar"> <span></span> <span></span> <span></span> </div> <a
-                  href="index.html" class="logo"> <img src="src/assets/images/logo/logo.png" alt=""> </a>
+                  href="index.html" class="logo"> <img src="http://127.0.0.1:5173/src/assets/images/logo/logo.png" alt=""> </a>
                 <div class="cart-holder">
                   <a href="#0" class="cart cart-icon position-relative">
                     <i class="flaticon-shopping-cart"></i>
@@ -144,7 +144,7 @@
         <div class="sidebar-textwidget">
           <div class="sidebar-info-contents">
             <div class="content-inner">
-              <div class="logo"> <a href="index.html"><img src="src/assets/images/logo/logo-2.png" alt=""></a>
+              <div class="logo"> <a href="index.html"><img src="http://127.0.0.1:5173/src/assets/images/logo/logo-2.png" alt=""></a>
               </div>
               <div class="content-box">
                 <h4>About Us</h4>
@@ -202,7 +202,7 @@
 
   <!--  Footer Three start -->
   <footer class="footer-default footer-3 ">
-    <div class="footer-default__shap_1 position-absolute "> <img src="src/assets/images/shape/footer-shape-1.png"
+    <div class="footer-default__shap_1 position-absolute "> <img src="http://127.0.0.1:5173/src/assets/images/shape/footer-shape-1.png"
                                                                  alt=""> </div>
     <!--Start Footer-->
     <div class="footer-default__main-footer position-relative">
@@ -297,10 +297,10 @@
             <p>© 2022 <a href="index.html">Game ru.</a> All Rights Reserved.</p>
           </div>
           <div class="footer-payment wow fadeInUp animated">
-            <a href="#0"> <img src="src/assets/images/home-four/method-1.jpg" alt="payment"> </a>
-            <a href="#0"> <img src="src/assets/images/home-four/method-2.jpg" alt="payment"> </a>
-            <a href="#0"> <img src="src/assets/images/home-four/method-3.jpg" alt="payment"> </a>
-            <a href="#0"> <img src="src/assets/images/home-four/method-4.jpg" alt="payment"> </a>
+            <a href="#0"> <img src="http://127.0.0.1:5173/src/assets/images/home-four/method-1.jpg" alt="payment"> </a>
+            <a href="#0"> <img src="http://127.0.0.1:5173/src/assets/images/home-four/method-2.jpg" alt="payment"> </a>
+            <a href="#0"> <img src="http://127.0.0.1:5173/src/assets/images/home-four/method-3.jpg" alt="payment"> </a>
+            <a href="#0"> <img src="http://127.0.0.1:5173/src/assets/images/home-four/method-4.jpg" alt="payment"> </a>
           </div>
         </div>
       </div>
