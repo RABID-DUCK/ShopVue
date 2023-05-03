@@ -356,7 +356,8 @@ export default {
         {key: 'dateNew','name' : 'Дата к новым'}
       ],
       selectedSort: "all",
-      pagination: []
+      pagination: [],
+      totalPrice: 0
     }
   },
   methods: {
@@ -389,6 +390,7 @@ export default {
           Array.prototype.push.apply(cart, newProduct);
           localStorage.setItem('cart', JSON.stringify(cart));
       }
+      this.calculateCartPrice()
     },
     addTags(id){
       if (!this.tags.includes(id)){
@@ -432,7 +434,6 @@ export default {
           .then(res => {
             this.products = res.data.data;
             this.pagination = res.data.meta;
-            console.log(res);
           })
           .finally(v => {
         $(document).trigger('changed')
@@ -468,6 +469,9 @@ export default {
           .finally(v => {
             $(document).trigger('changed');
           })
+    },
+    calculateCartPrice(){
+        this.totalPrice = this.products.reduce((sum, product) => sum + product.price * product.qty, 0)
     }
   },
 }

@@ -36,7 +36,7 @@
                 </form>
               </div>
               <ul class="page-dropdown-menu">
-                <li class="dropdown-list"> <router-link to="/"> <span>Home </span> </router-link></li>
+                <li class="dropdown-list"> <router-link to="/"> <span>Главная </span> </router-link></li>
                 <li class="dropdown-list"> <router-link to="/products"> <span>Продукты </span> </router-link>
                   <ul class="dropdown">
                     <li> <a href="index.html">Drop page 1</a> </li>
@@ -82,7 +82,7 @@
                       <nav>
                         <ul
                             class="page-dropdown-menu d-flex align-items-center justify-content-center">
-                          <li class="dropdown-list"> <router-link to="/"><span>Home</span></router-link></li>
+                          <li class="dropdown-list"> <router-link to="/"><span>Главная</span></router-link></li>
                           <li class="dropdown-list">
                             <router-link to="/products"><span>Продукты</span></router-link>
                           </li>
@@ -99,7 +99,7 @@
                               class="count">(2)</span> </a> </li>
                           <li class="cartm"> <a href="#0" class="number cart-icon"> <i
                               class="flaticon-shopping-cart"></i><span
-                              class="count">(5)</span> </a> </li>
+                              class="count">({{products ? products.length : 0}})</span> </a> </li>
                         </ul>
                       </div>
                     </div>
@@ -138,74 +138,32 @@
     <div class="side-cart d-flex flex-column justify-content-between">
       <div class="top">
         <div class="content d-flex justify-content-between align-items-center">
-          <h6 class="text-uppercase">Your Cart (03)</h6> <span class="cart-close text-uppercase">X</span>
+          <h6 class="text-uppercase">Ваша корзина ({{products ? products.length : 0}})</h6> <span class="cart-close text-uppercase">X</span>
         </div>
-        <div class="cart_items">
-          <div class="items d-flex justify-content-between align-items-center">
-            <div class="left d-flex align-items-center"> <a href="shop-details-1.html"
-                                                            class="thumb d-flex justify-content-between align-items-center"> <img
-                src="assets/images/shop/products-img1.jpg" alt=""> </a>
+        <div class="cart_items" v-if="products">
+          <div class="items d-flex justify-content-between align-items-center" v-for="product in products">
+            <div class="left d-flex align-items-center">
+              <a href="shop-details-1.html" class="thumb d-flex justify-content-between align-items-center">
+                <img :src="product.image_url" alt=""> </a>
               <div class="text"> <a href="shop-details-1.html">
-                <h6>Diamond Bracelet</h6>
+                <h6>{{product.title}}</h6>
               </a>
-                <p>2 X <span>$350.00</span> </p>
+                <p>{{product.qty}} X <span>{{product.price * product.qty}}.руб</span> </p>
               </div>
             </div>
             <div class="right">
-              <div class="item-remove"> <i class="flaticon-cross"></i> </div>
-            </div>
-          </div>
-          <div class="items d-flex justify-content-between align-items-center">
-            <div class="left d-flex align-items-center"> <a href="shop-details-1.html"
-                                                            class="thumb d-flex justify-content-between align-items-center"> <img
-                src="assets/images/shop/products-img2.jpg" alt=""> </a>
-              <div class="text"> <a href="shop-details-1.html">
-                <h6>Blacked Neckles </h6>
-              </a>
-                <p>1 X <span>$150.00</span> </p>
-              </div>
-            </div>
-            <div class="right">
-              <div class="item-remove"> <i class="flaticon-cross"></i> </div>
-            </div>
-          </div>
-          <div class="items d-flex justify-content-between align-items-center">
-            <div class="left d-flex align-items-center"> <a href="shop-details-1.html"
-                                                            class="thumb d-flex justify-content-between align-items-center"> <img
-                src="assets/images/shop/products-img3.jpg" alt=""> </a>
-              <div class="text"> <a href="shop-details-1.html">
-                <h6>Diamond Ring </h6>
-              </a>
-                <p>1 X <span>$200.00</span> </p>
-              </div>
-            </div>
-            <div class="right">
-              <div class="item-remove"> <i class="flaticon-cross"></i> </div>
-            </div>
-          </div>
-          <div class="items d-flex justify-content-between align-items-center">
-            <div class="left d-flex align-items-center"> <a href="shop-details-2.html"
-                                                            class="thumb d-flex justify-content-between align-items-center"> <img
-                src="assets/images/shop/products-img4.jpg" alt=""> </a>
-              <div class="text"> <a href="shop-details-1.html">
-                <h6>Women Earring</h6>
-              </a>
-                <p>1 X <span>$150.00</span> </p>
-              </div>
-            </div>
-            <div class="right">
-              <div class="item-remove"> <i class="flaticon-cross"></i> </div>
+              <div @click.prevent="removeCart(product.id)" class="item-remove"> <i class="flaticon-cross"></i> </div>
             </div>
           </div>
         </div>
       </div>
       <div class="bottom">
         <div class="total-ammount d-flex justify-content-between align-items-center">
-          <h6 class="text-uppercase">Total:</h6>
-          <h6 class="ammount text-uppercase">$850.00</h6>
+          <h6 class="text-uppercase">Итого:</h6>
+          <h6 class="ammount text-uppercase">{{totalPrice}}.руб</h6>
         </div>
         <div class="button-box d-flex justify-content-between">
-          <router-link to="/cart" class="btn_black"> View Cart</router-link> <a href="cart.html" class="button-2 btn_theme"> Chekout </a> </div>
+          <router-link to="/cart" class="btn_black p-2"> Страница корзины</router-link> <a href="cart.html" class="button-2 btn_theme"> Оформить </a> </div>
       </div>
     </div>
     <div class="sidebar-content-closer"></div>
@@ -389,10 +347,41 @@ export default {
   components: {
     selectCurrency
   },
+  data() {
+    return {
+      products: [],
+      totalPrice: 0,
+    }
+  },
 
   mounted() {
     $(document).trigger('changed')
+    this.getCartProducts()
+
   },
+  methods: {
+    getCartProducts(){
+      if (localStorage.getItem('cart')){
+        this.products = JSON.parse(localStorage.getItem('cart'));
+        this.calculateCartPrice()
+      }
+
+    },
+    removeCart(id){
+        this.products = this.products.filter(product => {
+            return product.id !== id
+        })
+      this.updateCart()
+      this.calculateCartPrice()
+    },
+    updateCart(cartProducts){
+      localStorage.setItem('cart', JSON.stringify(this.products))
+      this.products = cartProducts
+    },
+    calculateCartPrice(){
+      this.totalPrice = this.products.reduce((sum, product) => sum + product.price * product.qty, 0)
+    }
+  }
 }
 </script>
 
