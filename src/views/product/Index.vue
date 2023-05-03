@@ -185,7 +185,7 @@
                           </a>
                             <div class="products-grid-one__badge-box"> <span
                                 class="bg_base badge new ">New</span>
-                            </div> <a href="cart.html" class="addcart btn--primary style2">
+                            </div> <a @click.prevent="addToCart(product, true)" href="cart.html" class="addcart btn--primary style2">
                               Add To Cart </a>
                             <div class="products-grid__usefull-links">
                               <ul>
@@ -247,7 +247,7 @@
                                       <p class="text"> {{popupProduct.description}}
                                       </p>
                                       <div class="price">
-                                        <h2> {{ popupProduct.price }}.руб
+                                        <h2> {{ popupProduct.price }}$
                                           <del v-if="popupProduct.old_price > 0"> {{popupProduct.old_price}}.руб</del>
                                         </h2>
                                         <h6 v-if="popupProduct.is_published == 1" style="color: green;"> В наличии</h6>
@@ -257,14 +257,14 @@
                                         <h6>Количество:</h6>
                                         <div class="button-group">
                                           <div class="qtySelector text-center">
-                                                                                    <span class="decreaseQty"><i
-                                                                                        class="flaticon-minus"></i>
-                                                                                    </span> <input type="number"
-                                                                                                   class="qtyValue" value="1" />
+                                                <span class="decreaseQty"><i
+                                                    class="flaticon-minus"></i>
+                                                </span> <input type="number"
+                                                               class="qtyValue" value="1" />
                                             <span class="increaseQty"> <i
                                                 class="flaticon-plus"></i>
                                                                                     </span> </div>
-                                          <button class="btn--primary "> Добавить в корзину </button>
+                                          <button @click.prevent="addToCart(product)" class="btn--primary "> Добавить в корзину </button>
                                         </div>
                                       </div>
                                       <div class="payment-method"> <a href="#0"> <img
@@ -332,6 +332,7 @@
 </template>
 
 <script>
+
 export default {
 
   name: "Index",
@@ -359,6 +360,36 @@ export default {
     }
   },
   methods: {
+    addToCart(product, isSingle){
+      let qty = isSingle ? 1 : $('.qtyValue').val();
+      let cart = localStorage.getItem('cart');
+      $('.qtyValue').val(1);
+
+      let newProduct = [
+        {
+          "id": product.id,
+          "image_url": product.image_url,
+          "title": product.title,
+          "price": product.price,
+          "qty": qty
+        }
+      ];
+
+      if (!cart){
+        localStorage.setItem('cart', JSON.stringify(newProduct))
+      }
+      else{
+          cart = JSON.parse(cart);
+          cart.forEach(productInCart => {
+            if (productInCart.id === product.id){
+              productInCart.qty = Number(productInCart.qty) + Number(qty);
+              newProduct = null;
+            }
+          })
+          Array.prototype.push.apply(cart, newProduct);
+          localStorage.setItem('cart', JSON.stringify(cart));
+      }
+    },
     addTags(id){
       if (!this.tags.includes(id)){
         this.tags.push(id)
@@ -438,7 +469,7 @@ export default {
             $(document).trigger('changed');
           })
     }
-  }
+  },
 }
 </script>
 

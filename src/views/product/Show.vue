@@ -8,7 +8,7 @@
           <div class="col-xl-12">
             <div class="shop-details-inner">
               <ul class="shop-details-menu">
-                <li><a href="index.html">Home</a></li>
+                <li><router-link to="/products">Home</router-link></li>
                 <li class="active">Shop Details</li>
               </ul>
             </div>
@@ -24,53 +24,17 @@
           <div class="col-xl-6 col-lg-6 mt-30 wow fadeInUp animated">
             <div class="single-product-box one">
               <div class="big-product single-product-one slider-for">
-                <div>
-                  <div class="single-item"> <img src="http://127.0.0.1:5173/src/assets/images/shop/products-img1.jpg" alt="">
-                    <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                class="love"> <i class="flaticon-like"></i> </a>
-                  </div>
-                </div>
-                <div>
-                  <div class="single-item"> <img src="http://127.0.0.1:5173/src/assets/images/shop/products-img2.jpg" alt="">
-                    <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                class="love"> <i class="flaticon-like"></i> </a>
-                  </div>
-                </div>
-                <div>
-                  <div class="single-item"> <img src="http://127.0.0.1:5173/src/assets/images/shop/products-img3.jpg" alt="">
-                    <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                class="love"> <i class="flaticon-like"></i> </a>
-                  </div>
-                </div>
-                <div>
-                  <div class="single-item"> <img src="http://127.0.0.1:5173/src/assets/images/shop/products-img4.jpg" alt="">
-                    <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
-                                                                                class="love"> <i class="flaticon-like"></i> </a>
-                  </div>
-                </div>
-                <div>
-                  <div class="single-item"> <img src="http://127.0.0.1:5173/src/assets/images/shop/products-img5.jpg" alt="">
+                <div v-for="image in product.product_images">
+                  <div class="single-item"> <img :src="image.url" alt="">
                     <div class="ptag"> <span class="one">-20% </span> </div> <a href="#0"
                                                                                 class="love"> <i class="flaticon-like"></i> </a>
                   </div>
                 </div>
               </div>
-              <div class="navholder">
+              <div class="navholder" >
                 <div class="product-slicknav single-product-one-nav slider-nav">
-                  <div> <span class="single-item"> <img
-                      src="http://127.0.0.1:5173/src/assets/images/shop/shop-details-top-img-1.png" alt=""> </span>
-                  </div>
-                  <div> <span class="single-item"> <img
-                      src="http://127.0.0.1:5173/src/assets/images/shop/shop-details-top-img-2.png" alt=""> </span>
-                  </div>
-                  <div> <span class="single-item"> <img
-                      src="http://127.0.0.1:5173/src/assets/images/shop/shop-details-top-img-3.png" alt=""> </span>
-                  </div>
-                  <div> <span class="single-item"> <img
-                      src="http://127.0.0.1:5173/src/assets/images/shop/shop-details-top-img-1.png" alt=""> </span>
-                  </div>
-                  <div> <span class="single-item"> <img
-                      src="http://127.0.0.1:5173/src/assets/images/shop/shop-details-top-img-2.png" alt=""> </span>
+                  <div v-for="image in product.product_images"> <span class="single-item">
+                    <img :src="image.url" alt=""> </span>
                   </div>
                 </div>
               </div>
@@ -99,7 +63,7 @@
                   <li><span>Vendor:</span> Flemeno</li>
                 </ul>
                 <div class="shop-details-top-price-box">
-                  <h3>{{ product.price }}.руб <del>{{ product.old_price }}.руб</del></h3>
+                  <h3>{{ product.price }}.руб <del v-if="product.old_price">{{ product.old_price }}.руб</del></h3>
                   <p>(+15% Vat Included)</p>
                 </div>
                 <p class="shop-details-top-product-sale"><span>20</span> Products sold in last 12 hours
@@ -209,17 +173,17 @@
             </ul>
           </div>
         </div>
-        <div class="row wow fadeInUp animated">
+        <div class="row wow fadeInUp animated" v-if="product">
           <div class="tab-content" id="pills-tabContent-two">
             <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
                  aria-labelledby="pills-description-tab">
-              <div class="product-drescription">
+              <div class="product-drescription" >
                 <h4> Детали продукта:</h4>
                 <p> {{product.description}} </p>
                 <div class="row align-items-center">
                   <div class="col-lg-4 mt-30 ">
                     <div class="thumb"> <img
-                        src="http://127.0.0.1:5173/src/assets/images/shop/shop-details-tab-content-specification-img-1.jpg"
+                        :src="product.image_url"
                         alt=""> </div>
                   </div>
                   <div class="col-lg-8 mt-30">
